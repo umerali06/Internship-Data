@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZTS Technologies - Innovative Software Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Custom CSS for elements that need more specific styling */
+      .hero-gradient {
+        background: linear-gradient(135deg, #1e3a8a 0%, #000000 100%);
+      }
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .nav-link::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #3b82f6;
+        transition: width 0.3s;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+      .loading {
+        position: relative;
+        pointer-events: none;
+      }
+
+      .loading::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .loading::before {
+        content: "Sending...";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        color: #3b82f6;
+        font-weight: 500;
+      }
+
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        border-radius: 5px;
+        color: white;
+        font-weight: 500;
+        z-index: 1000;
+        animation: slideIn 0.5s ease-out;
+      }
+
+      .notification.success {
+        background-color: #10b981;
+      }
+
+      .notification.error {
+        background-color: #ef4444;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body class="font-sans antialiased text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20 items-center">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 flex items-center">
+              <span class="text-2xl font-bold text-blue-800">ZTS</span>
+              <span class="text-2xl font-bold text-black">Technologies</span>
+            </div>
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-8">
+              <a
+                href="#home"
+                class="nav-link text-black px-3 py-2 font-medium hover:text-blue-600"
+                >Home</a
+              >
+              <a
+                href="#services"
+                class="nav-link text-black px-3 py-2 font-medium hover:text-blue-600"
+                >Services</a
+              >
+              <a
+                href="#about"
+                class="nav-link text-black px-3 py-2 font-medium hover:text-blue-600"
+                >About</a
+              >
+              <a
+                href="#portfolio"
+                class="nav-link text-black px-3 py-2 font-medium hover:text-blue-600"
+                >Portfolio</a
+              >
+              <a
+                href="#contact"
+                class="nav-link text-black px-3 py-2 font-medium hover:text-blue-600"
+                >Contact</a
+              >
+            </div>
+          </div>
+          <div class="md:hidden">
+            <button
+              id="mobile-menu-button"
+              class="text-gray-800 hover:text-blue-600 focus:outline-none"
+            >
+              <i class="fas fa-bars text-2xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Mobile menu -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-white border-t border-gray-200"
+      >
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a
+            href="#home"
+            class="block px-3 py-2 text-base font-medium text-black hover:text-blue-600"
+            >Home</a
+          >
+          <a
+            href="#services"
+            class="block px-3 py-2 text-base font-medium text-black hover:text-blue-600"
+            >Services</a
+          >
+          <a
+            href="#about"
+            class="block px-3 py-2 text-base font-medium text-black hover:text-blue-600"
+            >About</a
+          >
+          <a
+            href="#portfolio"
+            class="block px-3 py-2 text-base font-medium text-black hover:text-blue-600"
+            >Portfolio</a
+          >
+          <a
+            href="#contact"
+            class="block px-3 py-2 text-base font-medium text-black hover:text-blue-600"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient text-white py-20 md:py-32">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-1/2 mb-10 md:mb-0">
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+            >
+              Innovating <span class="text-blue-400">Digital</span> Solutions
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 text-gray-300">
+              We build cutting-edge software that transforms businesses and
+              enhances user experiences.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#contact"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition duration-300"
+              >
+                Get Started
+              </a>
+              <a
+                href="#services"
+                class="bg-transparent hover:bg-white hover:text-black text-white border border-white px-8 py-3 rounded-lg font-medium transition duration-300"
+              >
+                Our Services
+              </a>
+            </div>
+          </div>
+          <div class="md:w-1/2 flex justify-center">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3273/3273617.png"
+              alt="Software Development"
+              class="w-3/4 md:w-full max-w-md animate-float"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-black mb-4">
+            Our <span class="text-blue-600">Services</span>
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            We offer comprehensive software development services tailored to
+            your business needs.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Service 1 -->
+          <div
+            class="service-card bg-white p-8 rounded-xl shadow-md transition duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-code text-blue-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-black mb-3">
+              Custom Software Development
+            </h3>
+            <p class="text-gray-600 mb-4">
+              Tailored solutions designed specifically for your business
+              requirements and workflows.
+            </p>
+            <a
+              href="#"
+              class="text-blue-600 font-medium inline-flex items-center"
+            >
+              Learn more <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+
+          <!-- Service 2 -->
+          <div
+            class="service-card bg-white p-8 rounded-xl shadow-md transition duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-mobile-alt text-blue-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-black mb-3">
+              Mobile App Development
+            </h3>
+            <p class="text-gray-600 mb-4">
+              Cross-platform mobile applications that engage users and drive
+              business growth.
+            </p>
+            <a
+              href="#"
+              class="text-blue-600 font-medium inline-flex items-center"
+            >
+              Learn more <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+
+          <!-- Service 3 -->
+          <div
+            class="service-card bg-white p-8 rounded-xl shadow-md transition duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-globe text-blue-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-black mb-3">Web Development</h3>
+            <p class="text-gray-600 mb-4">
+              Responsive, high-performance websites that deliver exceptional
+              user experiences.
+            </p>
+            <a
+              href="#"
+              class="text-blue-600 font-medium inline-flex items-center"
+            >
+              Learn more <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+
+          <!-- Service 4 -->
+          <div
+            class="service-card bg-white p-8 rounded-xl shadow-md transition duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-cloud text-blue-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-black mb-3">Cloud Solutions</h3>
+            <p class="text-gray-600 mb-4">
+              Scalable cloud infrastructure and services to power your digital
+              transformation.
+            </p>
+            <a
+              href="#"
+              class="text-blue-600 font-medium inline-flex items-center"
+            >
+              Learn more <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+
+          <!-- Service 5 -->
+          <div
+            class="service-card bg-white p-8 rounded-xl shadow-md transition duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-brain text-blue-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-black mb-3">
+              AI & Machine Learning
+            </h3>
+            <p class="text-gray-600 mb-4">
+              Intelligent systems that learn, adapt, and provide valuable
+              insights for your business.
+            </p>
+            <a
+              href="#"
+              class="text-blue-600 font-medium inline-flex items-center"
+            >
+              Learn more <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+
+          <!-- Service 6 -->
+          <div
+            class="service-card bg-white p-8 rounded-xl shadow-md transition duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-shield-alt text-blue-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-black mb-3">Cybersecurity</h3>
+            <p class="text-gray-600 mb-4">
+              Comprehensive security solutions to protect your digital assets
+              and data.
+            </p>
+            <a
+              href="#"
+              class="text-blue-600 font-medium inline-flex items-center"
+            >
+              Learn more <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3242/3242257.png"
+              alt="About ZTS Technologies"
+              class="rounded-lg shadow-xl"
+            />
+          </div>
+          <div class="md:w-1/2">
+            <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">
+              About <span class="text-blue-600">ZTS Technologies</span>
+            </h2>
+            <p class="text-gray-600 mb-6">
+              Founded in 2015, ZTS Technologies has grown from a small startup
+              to a leading software development company with a global presence.
+              Our team of over 100 skilled professionals is dedicated to
+              delivering innovative solutions that drive digital transformation.
+            </p>
+            <p class="text-gray-600 mb-6">
+              We believe in the power of technology to solve complex problems
+              and create meaningful impact. Our approach combines technical
+              expertise with deep industry knowledge to deliver solutions that
+              are not just functional, but transformative.
+            </p>
+            <div class="grid grid-cols-2 gap-4 mb-8">
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3"
+                >
+                  <i class="fas fa-check text-blue-600"></i>
+                </div>
+                <span class="font-medium">100+ Projects</span>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3"
+                >
+                  <i class="fas fa-check text-blue-600"></i>
+                </div>
+                <span class="font-medium">50+ Clients</span>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3"
+                >
+                  <i class="fas fa-check text-blue-600"></i>
+                </div>
+                <span class="font-medium">10+ Countries</span>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3"
+                >
+                  <i class="fas fa-check text-blue-600"></i>
+                </div>
+                <span class="font-medium">24/7 Support</span>
+              </div>
+            </div>
+            <a
+              href="#"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium inline-flex items-center transition duration-300"
+            >
+              Learn More About Us <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-black mb-4">
+            Our <span class="text-blue-600">Portfolio</span>
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Explore some of our recent projects that showcase our expertise and
+            capabilities.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Project 1 -->
+          <div
+            class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300"
+          >
+            <div class="h-48 bg-blue-100 flex items-center justify-center">
+              <i class="fas fa-shopping-cart text-blue-600 text-5xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-black mb-2">
+                E-Commerce Platform
+              </h3>
+              <p class="text-gray-600 mb-4">
+                A complete e-commerce solution with AI-powered recommendations
+                and seamless checkout.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full"
+                  >React</span
+                >
+                <span
+                  class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full"
+                  >Node.js</span
+                >
+                <span
+                  class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full"
+                  >MongoDB</span
+                >
+              </div>
+              <a
+                href="#"
+                class="text-blue-600 font-medium inline-flex items-center"
+              >
+                View Case Study <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div
+            class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300"
+          >
+            <div class="h-48 bg-blue-100 flex items-center justify-center">
+              <i class="fas fa-mobile-alt text-blue-600 text-5xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-black mb-2">
+                Fitness Mobile App
+              </h3>
+              <p class="text-gray-600 mb-4">
+                A personalized fitness app with workout tracking, nutrition
+                plans, and progress analytics.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full"
+                  >Flutter</span
+                >
+                <span
+                  class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full"
+                  >Firebase</span
+                >
+                <span
+                  class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full"
+                  >AI</span
+                >
+              </div>
+              <a
+                href="#"
+                class="text-blue-600 font-medium inline-flex items-center"
+              >
+                View Case Study <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div
+            class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300"
+          >
+            <div class="h-48 bg-blue-100 flex items-center justify-center">
+              <i class="fas fa-chart-line text-blue-600 text-5xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-black mb-2">
+                Financial Analytics Dashboard
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Real-time financial data visualization and predictive analytics
+                for investment firms.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full"
+                  >React</span
+                >
+                <span
+                  class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full"
+                  >Python</span
+                >
+                <span
+                  class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full"
+                  >D3.js</span
+                >
+              </div>
+              <a
+                href="#"
+                class="text-blue-600 font-medium inline-flex items-center"
+              >
+                View Case Study <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <a
+            href="#"
+            class="bg-white hover:bg-gray-100 text-black border border-gray-300 px-8 py-3 rounded-lg font-medium inline-flex items-center transition duration-300"
+          >
+            View All Projects <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-blue-600 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            What Our <span class="text-black">Clients Say</span>
+          </h2>
+          <p class="text-lg text-blue-100 max-w-2xl mx-auto">
+            Don't just take our word for it - hear from our satisfied clients.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div class="bg-white bg-opacity-10 p-8 rounded-xl backdrop-blur-sm">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-xl font-bold mr-4"
+              >
+                JD
+              </div>
+              <div>
+                <h4 class="font-bold">John Doe</h4>
+                <p class="text-blue-200 text-sm">CEO, TechCorp</p>
+              </div>
+            </div>
+            <p class="text-blue-100">
+              "ZTS Technologies transformed our outdated systems into a modern,
+              efficient platform. Their team was professional, knowledgeable,
+              and delivered beyond our expectations."
+            </p>
+            <div class="flex mt-4 text-yellow-300">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="bg-white bg-opacity-10 p-8 rounded-xl backdrop-blur-sm">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-xl font-bold mr-4"
+              >
+                AS
+              </div>
+              <div>
+                <h4 class="font-bold">Alice Smith</h4>
+                <p class="text-blue-200 text-sm">CTO, InnovateX</p>
+              </div>
+            </div>
+            <p class="text-blue-100">
+              "The mobile app developed by ZTS has significantly increased our
+              customer engagement. Their attention to detail and user experience
+              focus was impressive."
+            </p>
+            <div class="flex mt-4 text-yellow-300">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="bg-white bg-opacity-10 p-8 rounded-xl backdrop-blur-sm">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-xl font-bold mr-4"
+              >
+                RJ
+              </div>
+              <div>
+                <h4 class="font-bold">Robert Johnson</h4>
+                <p class="text-blue-200 text-sm">Director, Global Finance</p>
+              </div>
+            </div>
+            <p class="text-blue-100">
+              "Their cloud migration expertise saved us thousands in
+              infrastructure costs while improving performance. ZTS is our go-to
+              partner for all tech initiatives."
+            </p>
+            <div class="flex mt-4 text-yellow-300">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row">
+          <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">
+              Get In <span class="text-blue-600">Touch</span>
+            </h2>
+            <p class="text-gray-600 mb-8">
+              Ready to start your project or have questions about our services?
+              Contact us today and our team will get back to you within 24
+              hours.
+            </p>
+
+            <div class="space-y-6">
+              <div class="flex items-start">
+                <div
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1"
+                >
+                  <i class="fas fa-map-marker-alt text-blue-600"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-black">Our Location</h4>
+                  <p class="text-gray-600">
+                    123 Tech Park, Silicon Valley, CA 94000
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1"
+                >
+                  <i class="fas fa-envelope text-blue-600"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-black">Email Us</h4>
+                  <p class="text-gray-600">info@ztstech.com</p>
+                  <p class="text-gray-600">support@ztstech.com</p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1"
+                >
+                  <i class="fas fa-phone-alt text-blue-600"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-black">Call Us</h4>
+                  <p class="text-gray-600">+1 (555) 123-4567</p>
+                  <p class="text-gray-600">Mon-Fri, 9am-6pm PST</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-10">
+              <h4 class="font-bold text-black mb-4">Follow Us</h4>
+              <div class="flex space-x-4">
+                <a
+                  href="#"
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300"
+                >
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300"
+                >
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition duration-300"
+                >
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="md:w-1/2">
+            <form id="contact-form" class="bg-gray-50 p-8 rounded-xl shadow-md">
+              <div class="mb-6">
+                <label for="name" class="block text-gray-700 font-medium mb-2"
+                  >Full Name</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="John Doe"
+                />
+              </div>
+              <div class="mb-6">
+                <label for="email" class="block text-gray-700 font-medium mb-2"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="john@example.com"
+                />
+              </div>
+              <div class="mb-6">
+                <label for="phone" class="block text-gray-700 font-medium mb-2"
+                  >Phone Number</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="+1 (555) 123-4567"
+                />
+              </div>
+              <div class="mb-6">
+                <label
+                  for="service"
+                  class="block text-gray-700 font-medium mb-2"
+                  >Service Interested In</label
+                >
+                <select
+                  id="service"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="">Select a service</option>
+                  <option value="custom-software">
+                    Custom Software Development
+                  </option>
+                  <option value="mobile-app">Mobile App Development</option>
+                  <option value="web-dev">Web Development</option>
+                  <option value="cloud">Cloud Solutions</option>
+                  <option value="ai">AI & Machine Learning</option>
+                  <option value="cyber">Cybersecurity</option>
+                </select>
+              </div>
+              <div class="mb-6">
+                <label
+                  for="message"
+                  class="block text-gray-700 font-medium mb-2"
+                  >Your Message</label
+                >
+                <textarea
+                  id="message"
+                  rows="5"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Tell us about your project..."
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300"
+              >
+                Send Message <i class="fas fa-paper-plane ml-2"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-gray-100">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h3 class="text-2xl font-bold text-black mb-4">
+          Subscribe to Our Newsletter
+        </h3>
+        <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+          Stay updated with the latest tech trends, company news, and exclusive
+          offers from ZTS Technologies.
+        </p>
+        <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <input
+            type="email"
+            placeholder="Your email address"
+            class="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+          <button
+            type="submit"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 whitespace-nowrap"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-6">
+              <span class="text-blue-600">ZTS</span> Technologies
+            </h3>
+            <p class="text-gray-400 mb-6">
+              Innovating digital solutions to transform businesses and enhance
+              user experiences.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition duration-300"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition duration-300"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition duration-300"
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition duration-300"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-6">Services</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >Custom Software</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >Mobile Apps</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >Web Development</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >Cloud Solutions</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >AI & ML</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-6">Company</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >Careers</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >Blog</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >Press</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >Partners</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-6">Support</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >Help Center</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >Documentation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >Status</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition duration-300"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center"
+        >
+          <p class="text-gray-400 mb-4 md:mb-0">
+            &copy; 2023 ZTS Technologies. All rights reserved.
+          </p>
+          <div class="flex space-x-6">
+            <a
+              href="#"
+              class="text-gray-400 hover:text-white transition duration-300"
+              >Terms of Service</a
+            >
+            <a
+              href="#"
+              class="text-gray-400 hover:text-white transition duration-300"
+              >Privacy Policy</a
+            >
+            <a
+              href="#"
+              class="text-gray-400 hover:text-white transition duration-300"
+              >Cookie Policy</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button
+      id="back-to-top"
+      class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300"
+    >
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+      // Mobile menu toggle
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      mobileMenuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute("href");
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: "smooth",
+            });
+
+            // Close mobile menu if open
+            mobileMenu.classList.add("hidden");
+          }
+        });
+      });
+
+      // Back to top button
+      const backToTopButton = document.getElementById("back-to-top");
+
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.remove("opacity-0", "invisible");
+          backToTopButton.classList.add("opacity-100", "visible");
+        } else {
+          backToTopButton.classList.remove("opacity-100", "visible");
+          backToTopButton.classList.add("opacity-0", "invisible");
+        }
+      });
+
+      backToTopButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+
+      // Form submission
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const form = e.target;
+          const submitButton = form.querySelector('button[type="submit"]');
+
+          // Disable form and show loading state
+          form.classList.add("loading");
+          submitButton.disabled = true;
+          submitButton.innerHTML =
+            'Sending... <i class="fas fa-spinner fa-spin ml-2"></i>';
+
+          const data = {
+            name: form.name.value,
+            email: form.email.value,
+            phone: form.phone.value,
+            service: form.service.value,
+            message: form.message.value,
+          };
+
+          try {
+            // Start timing the request
+            const startTime = Date.now();
+
+            const response = await fetch("http://localhost:3000/contact", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+            const result = await response.json();
+
+            // Calculate time taken
+            const timeTaken = Date.now() - startTime;
+            console.log(`Request took ${timeTaken}ms`);
+
+            if (response.ok) {
+              // Show success notification
+              showNotification("Message sent successfully!", "success");
+              // Reset form
+              form.reset();
+            } else {
+              // Show error notification
+              showNotification(
+                result.message || "Failed to send message",
+                "error"
+              );
+            }
+          } catch (err) {
+            console.error("Error:", err);
+            // Show error notification
+            showNotification(
+              "There was an error sending your message.",
+              "error"
+            );
+          } finally {
+            // Remove loading state and re-enable form
+            form.classList.remove("loading");
+            submitButton.disabled = false;
+            submitButton.innerHTML =
+              'Send Message <i class="fas fa-paper-plane ml-2"></i>';
+          }
+        });
+
+      // Add this function for notifications
+      function showNotification(message, type = "success") {
+        // Remove any existing notifications
+        const existingNotification = document.querySelector(".notification");
+        if (existingNotification) {
+          existingNotification.remove();
+        }
+
+        // Create new notification
+        const notification = document.createElement("div");
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        // Remove notification after 3 seconds
+        setTimeout(() => {
+          notification.remove();
+        }, 3000);
+      }
+    </script>
+  </body>
+</html>
