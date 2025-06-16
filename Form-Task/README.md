@@ -17,9 +17,9 @@ node server.js
 Request body:
 ```json
 {
-    "name": "John Doe",
-    "email": "john@example.com",
-    "phone": "1234567890",
+    "name": "Umer Ali",
+    "email": "umerali7454@gmail.com",
+    "phone": "0318*******",
     "service": "web-dev",
     "message": "Hello, I'm interested in your services."
 }
@@ -92,7 +92,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Support
 
-For support, email [your-email] or create an issue in the repository.
+For support, email [umerali7454@gmail.com] or create an issue in the repository.
 
 ## Acknowledgments
 
